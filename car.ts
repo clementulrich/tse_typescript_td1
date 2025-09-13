@@ -19,7 +19,6 @@ export class Car {
     fuelTank: number
     fuelLevel: number
 
-
     // Constructeur de la "Car"
     constructor(model: string, brand: string, color: string, year: number, maxspeed: number, fuelTank: number, fuelConsumption: number) {
         this.model = model;
@@ -48,20 +47,38 @@ export class Car {
 
     // Méthode d'accélération  d'une voiture
     accelerate(amount: number): void {
-        if (this.started) {
-            this.speed += amount;
+    if (this.started) {
+        this.speed += amount;
+        if (this.speed > this.maxspeed) {
+            this.speed = this.maxspeed;
+            }
         }
     }
 
     // Méthode de décélération d'une voiture
     decelerate(amount: number): void {
-        if (this.started) {
-            this.speed -= amount;
+    if (this.started) {
+        this.speed -= amount;
+        if (this.speed < 0) {
+            this.speed = 0;
+            }
         }
     }
 
+    // Détermine par la suite si la vitesse maximum de la voiture est atteinte
     reachMaxSpeed(): boolean {
     return this.speed === this.maxspeed;
+    }
+
+    consumeFuel(distanceKm: number): void {
+        const fuelUsed = (this.fuelConsumption / 100) * distanceKm;
+        this.fuelLevel = Math.max(this.fuelLevel - fuelUsed, 0);
+    }
+
+    // Calcul la distance restante d'une voiture avant de tomber en panne
+    remainingRange(): number {
+        if (this.fuelConsumption === 0) return Infinity;
+        return (this.fuelLevel / this.fuelConsumption) * 100;
     }
 
     // Affiche les voitures avec leur marque, modèle, vitesse, état de démarrage etc
@@ -70,6 +87,6 @@ export class Car {
     } 
 
     public toString(): string {
-    return  "\n" + this.model + " " + this.brand + " [" + this.year + "] {" + this.color + "} <" + this.started + " - " + this.speed + "km/h>" + " - Max speed reached: " + this.reachMaxSpeed();
+        return  "\n" + this.model + " " + this.brand + " [" + this.year + "] {" + this.color + "} <" + this.started + " - " + this.speed + "km/h>" + " - Max speed reached: " + this.reachMaxSpeed();
     }
 }
