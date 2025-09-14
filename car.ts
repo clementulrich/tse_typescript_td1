@@ -7,10 +7,25 @@
 
 // Développer un module qui importe et utilise cette classe Car
 
+export enum Color {
+    black = "Matt Black",
+    red = "Electric Red",
+    grey = "Grey Bull",
+    white = "Arctic White",
+    blue = "Deep Blue Pearl",
+    green = "Forest Green Metallic",
+    silver = "Liquid Silver",
+    yellow = "Sunburst Yellow",
+    orange = "Tangerine Glow",
+    brown = "Earth Brown Matte",
+    purple = "Royal Purple Lacquer",
+    gold = "Sunset Gold Metallic"
+}
+
 export class Car {
     model: string;
     brand: string;
-    color: string;
+    color: Color;
     year: number;
     speed: number;
     started: boolean;
@@ -20,7 +35,7 @@ export class Car {
     fuelLevel: number
 
     // Constructeur de la "Car"
-    constructor(model: string, brand: string, color: string, year: number, maxspeed: number, fuelTank: number, fuelConsumption: number) {
+    constructor(model: string, brand: string, color: Color, year: number, maxspeed: number, fuelTank: number, fuelConsumption: number) {
         this.model = model;
         this.brand = brand;
         this.color = color;
@@ -87,6 +102,38 @@ export class Car {
     } 
 
     public toString(): string {
-        return  "\n" + this.model + " " + this.brand + " [" + this.year + "] {" + this.color + "} <" + this.started + " - " + this.speed + "km/h>" + " - Max speed reached: " + this.reachMaxSpeed();
+        const status = this.started ? "Started" : "Stopped";
+        return  "\n" + this.model + " " + this.brand + " [" + this.year + "] {" + this.color + "} <" + status + " - " + this.speed + "km/h>" + " - Max speed reached: " + this.reachMaxSpeed();
     }
+}
+
+export class Motorbike {
+    model: string;
+    brand: string;
+    color: Color;
+    year: number;
+    speed: number;
+    started: boolean;
+    maxspeed: number;
+    fuelConsumption: number
+    fuelTank: number
+    fuelLevel: number
+    nbWheels: number
+
+    // Constructeur de la "Motorbike"
+    constructor(model: string, brand: string, color: Color, year: number, maxspeed: number, fuelTank: number, fuelConsumption: number, nbWheels: number) {
+        this.model = model;
+        this.brand = brand;
+        this.color = color;
+        this.year = year;
+        this.speed = 0;
+        this.started = false;
+        this.maxspeed = maxspeed;
+        this.fuelTank = fuelTank;
+        this.fuelConsumption = fuelConsumption;
+        this.fuelLevel = fuelTank;
+        this.nbWheels = nbWheels;
+    }
+
+    
 }

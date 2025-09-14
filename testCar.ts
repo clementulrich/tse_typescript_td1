@@ -1,11 +1,13 @@
 import { Car } from './car';
+import { Color } from './car';
 
+// Zone de sélection des distances parcourues par chaque voiture (impact sur la durée avant de tomber en panne)
 const distances = [10, 50, 200, 600];
 
-let c1: Car = new Car("Fiat", "Multipla", "Lime Green", 1998, 170, 63, 7.7);
-let c2: Car = new Car("Lancia", "Delta I", "Electric red", 1989, 220, 57, 7.9);
-let c3: Car = new Car("Caterham", "Super", "Matt Black", 1999, 196, 36, 7.2);
-let c4: Car = new Car("Aston Martin", "DB9", "Grey bull", 2005, 300, 85, 12.2);
+let c1: Car = new Car("Fiat", "Multipla", Color.gold, 1998, 170, 63, 7.7);
+let c2: Car = new Car("Lancia", "Delta I", Color.red, 1989, 220, 57, 7.9);
+let c3: Car = new Car("Caterham", "Super", Color.black, 1999, 196, 36, 7.2);
+let c4: Car = new Car("Aston Martin", "DB9", Color.grey, 2005, 300, 85, 12.2);
 
 c2.start();
 c2.accelerate(220);
