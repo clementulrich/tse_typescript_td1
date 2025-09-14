@@ -22,7 +22,10 @@ export enum Color {
     gold = "Sunset Gold Metallic"
 }
 
-export class Car {
+
+
+// Classe abstraite Vehicle avec propriétés générales et liées au carburant
+export abstract class Vehicle {
     model: string;
     brand: string;
     color: Color;
@@ -30,11 +33,11 @@ export class Car {
     speed: number;
     started: boolean;
     maxspeed: number;
-    fuelConsumption: number
-    fuelTank: number
-    fuelLevel: number
+    fuelConsumption: number;
+    fuelTank: number;
+    fuelLevel: number;
 
-    // Constructeur de la "Car"
+    // Constructeur de Vehicle
     constructor(model: string, brand: string, color: Color, year: number, maxspeed: number, fuelTank: number, fuelConsumption: number) {
         this.model = model;
         this.brand = brand;
@@ -48,92 +51,136 @@ export class Car {
         this.fuelLevel = fuelTank;
     }
 
-    // Démarrage de la voiture
+    // Démarrage du véhicule
     start(): void {
         this.speed = 0;
         this.started = true;
     }
 
-    // Arrêt de la voiture
+    // Arrêt du véhicule
     stop(): void {
         this.speed = 0;
         this.started = false;
     }
 
-    // Méthode d'accélération  d'une voiture
+    // Accélération
     accelerate(amount: number): void {
-    if (this.started) {
-        this.speed += amount;
-        if (this.speed > this.maxspeed) {
-            this.speed = this.maxspeed;
+        if (this.started) {
+            this.speed += amount;
+            if (this.speed > this.maxspeed) {
+                this.speed = this.maxspeed;
             }
         }
     }
 
-    // Méthode de décélération d'une voiture
+    // Décélération
     decelerate(amount: number): void {
-    if (this.started) {
-        this.speed -= amount;
-        if (this.speed < 0) {
-            this.speed = 0;
+        if (this.started) {
+            this.speed -= amount;
+            if (this.speed < 0) {
+                this.speed = 0;
             }
         }
     }
 
-    // Détermine par la suite si la vitesse maximum de la voiture est atteinte
+    // Vérifie si la vitesse max est atteinte
     reachMaxSpeed(): boolean {
-    return this.speed === this.maxspeed;
+        return this.speed === this.maxspeed;
     }
 
+    // Consomme le carburant selon la distance parcourue
     consumeFuel(distanceKm: number): void {
         const fuelUsed = (this.fuelConsumption / 100) * distanceKm;
         this.fuelLevel = Math.max(this.fuelLevel - fuelUsed, 0);
     }
 
-    // Calcul la distance restante d'une voiture avant de tomber en panne
+    // Calcule la distance restante avant la panne sèche
     remainingRange(): number {
         if (this.fuelConsumption === 0) return Infinity;
         return (this.fuelLevel / this.fuelConsumption) * 100;
     }
 
-    // Affiche les voitures avec leur marque, modèle, vitesse, état de démarrage etc
+    // Méthode abstraite à définir dans chaque classe concrète
+    abstract toString(): string;
+
+    // Affiche les informations du véhicule
     public display(): void {
         console.log(this.toString());
-    } 
-
-    public toString(): string {
-        const status = this.started ? "Started" : "Stopped";
-        return  "\n" + this.model + " " + this.brand + " [" + this.year + "] {" + this.color + "} <" + status + " - " + this.speed + "km/h>" + " - Max speed reached: " + this.reachMaxSpeed();
     }
 }
 
-export class Motorbike {
-    model: string;
-    brand: string;
-    color: Color;
-    year: number;
-    speed: number;
-    started: boolean;
-    maxspeed: number;
-    fuelConsumption: number
-    fuelTank: number
-    fuelLevel: number
-    nbWheels: number
 
-    // Constructeur de la "Motorbike"
+
+// Classe Car qui étend Vehicle
+export class Car extends Vehicle {
+
+    // Constructeur de Car qui délègue à Vehicle
+    constructor(model: string, brand: string, color: Color, year: number, maxspeed: number, fuelTank: number, fuelConsumption: number) {
+        super(model, brand, color, year, maxspeed, fuelTank, fuelConsumption);
+    }
+
+    // Représentation textuelle de l'état de la voiture
+    toString(): string {
+        const status = this.started ? "Started" : "Stopped";
+        return  "\n" + this.model + " " + this.brand + " [" + this.year + "] {" + this.color + "} <" + status + " - " + this.speed + "km/h>" + " Max speed reached: " + this.reachMaxSpeed() + "\n" + "Fuel restant : " + this.fuelLevel.toFixed(2) + "L";
+    }
+}
+
+
+
+// Classe Motorbike qui étent Vehicle
+export class Motorbike extends Vehicle {
+    nbWheels: number;
+
+    // Constructeur de Motorbike qui délègue à Vehicle
     constructor(model: string, brand: string, color: Color, year: number, maxspeed: number, fuelTank: number, fuelConsumption: number, nbWheels: number) {
-        this.model = model;
-        this.brand = brand;
-        this.color = color;
-        this.year = year;
-        this.speed = 0;
-        this.started = false;
-        this.maxspeed = maxspeed;
-        this.fuelTank = fuelTank;
-        this.fuelConsumption = fuelConsumption;
-        this.fuelLevel = fuelTank;
+        super(model, brand, color, year, maxspeed, fuelTank, fuelConsumption);
         this.nbWheels = nbWheels;
     }
 
-    
+    // Représentation textuelle de l'état de la moto
+    toString(): string {
+        const status = this.started ? "Started" : "Stopped";
+        return  "\n" + this.model + " " + this.brand + " [" + this.year + "] {" + this.color + "} <" + status + " - " + this.speed + "km/h> - Wheels: " + this.nbWheels + "\n" + "Fuel restant : " + this.fuelLevel.toFixed(2) + "L";
+    }
+}
+
+
+
+// Classe Truck qui étent Vehicle
+export class Truck extends Vehicle {
+    loadCapacity: number;
+    currentLoad: number = 0;
+
+    // Constructeur de Truck qui délègue à Vehicle
+    constructor(model: string, brand: string, color: Color, year: number, maxspeed: number, fuelTank: number, fuelConsumption: number, loadCapacity: number) {
+        super(model, brand, color, year, maxspeed, fuelTank, fuelConsumption);
+        console.log(`Truck created with fuelConsumption=${fuelConsumption}`);
+        this.loadCapacity = loadCapacity;
+    }
+
+    // Méthode de chargement d'un camion
+    loadCargo(weight: number): string {
+        if (this.currentLoad + weight <= this.loadCapacity) {
+            this.currentLoad += weight;
+            return `Loaded ${weight} kg. Current load: ${this.currentLoad} kg.`;
+        }
+        return `Cannot load ${weight} kg. Exceeds capacity of ${this.loadCapacity} kg.`;
+    }
+
+    // Méthode de déchargement d'un camion
+    unloadCargo(weight: number): string {
+        if (weight <= this.currentLoad) {
+            this.currentLoad -= weight;
+            return `Unloaded ${weight} kg. Current load: ${this.currentLoad} kg.`;
+        }
+        return `Cannot unload ${weight} kg. Only ${this.currentLoad} kg loaded.`;
+    }
+
+    toString(): string {
+        const status = this.started ? "Started" : "Stopped";
+        const currentLoadTons = (this.currentLoad / 1000).toFixed(2);
+        const loadCapacityTons = (this.loadCapacity / 1000).toFixed(2);
+        return  "\n" + this.model + " " + this.brand + " [" + this.year + "] {" + this.color + "} <" + status + " - " + this.speed + "km/h> - Load: " + currentLoadTons + "t / " + loadCapacityTons + "t";
+    }
 }
