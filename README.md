@@ -17,6 +17,9 @@
 
 ## Ajouts personnels
 ### Class Car
+- Ajout mode F1 utilisant les paramètres et méthode de Car ainsi que plusieurs nouvelles classes (Season, Race, Circuit...)
+- Nouveau code de test propre à la F1 (testF1.ts)
+
 - Ajout d'une énumération de couleurs pour faciliter le choix
 - Ajout d'une classe abstraite permettant de gérer les paramètres et méthodes communs aux différents types de véhicules
 - Création de 3 classes représentant les voitures, motos et camions
@@ -36,6 +39,8 @@
 - Ajout de la méthode de calcul du carburant déjà consommé ainsi que de la distance pouvant être encore parcourue
 - Affichage des données déjà existantes ainsi que de la vitesse maximum, de l'état du réservoir et le distance restant parcourable
 - Personnalisation des éléments affichés pour chaque type de véhicule (Motorbike: nombre de roues, Truck: poids de chargement...)
+
+- Nouvelle classe de TestF1 permettant l'affichage d'une course de GP avec ses pilotes, écuries, résultats et mises à jour du score de la saison
 
 
 

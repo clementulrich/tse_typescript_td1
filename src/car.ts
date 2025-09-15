@@ -23,7 +23,6 @@ export enum Color {
 }
 
 
-
 // Classe abstraite Vehicle avec propriétés générales et liées au carburant
 export abstract class Vehicle {
     model: string;
@@ -110,7 +109,6 @@ export abstract class Vehicle {
 }
 
 
-
 // Classe Car qui étend Vehicle
 export class Car extends Vehicle {
 
@@ -125,7 +123,6 @@ export class Car extends Vehicle {
         return  "\n" + this.model + " " + this.brand + " [" + this.year + "] {" + this.color + "} <" + status + " - " + this.speed + "km/h>" + " Max speed reached: " + this.reachMaxSpeed() + "\n" + "Fuel restant : " + this.fuelLevel.toFixed(2) + "L";
     }
 }
-
 
 
 // Classe Motorbike qui étent Vehicle
@@ -146,7 +143,6 @@ export class Motorbike extends Vehicle {
 }
 
 
-
 // Classe Truck qui étent Vehicle
 export class Truck extends Vehicle {
     loadCapacity: number;
@@ -155,7 +151,6 @@ export class Truck extends Vehicle {
     // Constructeur de Truck qui délègue à Vehicle
     constructor(model: string, brand: string, color: Color, year: number, maxspeed: number, fuelTank: number, fuelConsumption: number, loadCapacity: number) {
         super(model, brand, color, year, maxspeed, fuelTank, fuelConsumption);
-        console.log(`Truck created with fuelConsumption=${fuelConsumption}`);
         this.loadCapacity = loadCapacity;
     }
 
@@ -181,6 +176,6 @@ export class Truck extends Vehicle {
         const status = this.started ? "Started" : "Stopped";
         const currentLoadTons = (this.currentLoad / 1000).toFixed(2);
         const loadCapacityTons = (this.loadCapacity / 1000).toFixed(2);
-        return  "\n" + this.model + " " + this.brand + " [" + this.year + "] {" + this.color + "} <" + status + " - " + this.speed + "km/h> - Load: " + currentLoadTons + "t / " + loadCapacityTons + "t";
+        return  "\n" + this.model + " " + this.brand + " [" + this.year + "] {" + this.color + "} <" + status + " - " + this.speed + "km/h> - Load: " + currentLoadTons + "t / " + loadCapacityTons + "t" + "\n" + "Fuel restant : " + this.fuelLevel.toFixed(2) + "L";
     }
 }
