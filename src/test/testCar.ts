@@ -1,7 +1,7 @@
-import { Color, Vehicle, Car, Motorbike, Truck } from './car';
+import { Color, Vehicle, Car, Motorbike, Truck } from '../car';
 
 // Distances parcourues pour chaque véhicule (impact consommation carburant)
-const distances = [10, 50, 200, 600, 120, 30];
+const distances = [10, 50, 200, 600, 120, 30, 75, 250, 1025];
 
 // Initialisation des paramètres de tous les véhicules
 let c1: Car = new Car("Fiat", "Multipla", Color.gold, 1998, 170, 63, 7.7);
@@ -52,14 +52,8 @@ vehicles.forEach((vehicle, index) => {
     vehicle.consumeFuel(distances[index]);
     vehicle.display();
 
-    if (!(vehicle instanceof Truck)) {
-        // Affichage normal des km restants pour tous sauf les camions
-        const range = vehicle.remainingRange();
-        console.log(`Km restant avant la panne : ${range.toFixed(2)} km`);
-    }
+    const range = vehicle.remainingRange();
+    console.log(`Km restant avant la panne : ${range.toFixed(2)} km`);
     
-    if (vehicle instanceof Truck) {
-        console.log(`Charge transportée : ${vehicle.currentLoad} kg`);
-    }
     console.log('');
 });
