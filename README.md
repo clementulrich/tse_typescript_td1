@@ -1,5 +1,21 @@
 # tse_typescript_td1
 
+## Démarrage du projet
+### Composition du projet
+L'ensemble du projet est divisé en plusieurs parties. Nous avons à la racine le README ainsi que le dossier `src`
+
+Ce dernier est divisé en deux dossiers `f1` et `test` ainsi que la classe Car.ts
+
+Le dossier `f1` regroupe l'ensemble des classes liées aux courses, équipes, circuits et autre composantes de F1
+
+Le dossier `test` regroupe les deux fichiers de test, l'un permettant de mettre en applications les fonctionnalités de la F1 pendant que l'autre met en avant les méthode de la classe `Car` à savoir la construction d'un véhicule, son affection à un type (Car, Motorbike ou Truck) etc
+
+### Démarrage des fichiers de test
+1. S'assurer que node, npm et tsc sont bien présents sur l'appareil utilisé, pour vérifier réaliser `node -v`, `npm -v` et `tsc --version`
+2. Se rendre dans le dossier approprié `cd /src/test/`
+3. Lancer la création des deux fichiers JS à savoir `tsc testCar.ts` et `tsc car.ts`
+4. Pour tester la classe F1, taper dans le shell `node testCar.js`
+5. Pour tester la classe Car, taper dans le shell `node car.js`
 
 ## Fonction de bases
 ### Class Car
