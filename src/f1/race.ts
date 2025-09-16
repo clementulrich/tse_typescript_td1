@@ -1,7 +1,6 @@
 import { F1Car } from './f1car';
 import { Circuit } from './circuit';
 
-// Représente une course dans la saison
 export class Race {
     public classement: F1Car[] = [];
 

@@ -28,7 +28,7 @@ export class Season {
         this.races.forEach(race => 
             console.log(`${race.name} sur ${race.circuit.name} le ${race.date.toLocaleDateString('fr-FR')}`)
         );
-        console.log(''); // Ligne vide pour espacer
+        console.log('');
     }
 
 

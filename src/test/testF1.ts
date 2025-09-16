@@ -44,7 +44,7 @@ const haas = new Team("Haas F1 Team", "USA");
 haas.addPilote(magnussen);
 
 
-// Création des voitures de F1
+// Création des voitures
 const car1 = new F1Car("W13", "Mercedes", Color.silver, 2023, 350, 110, 30, mercedes, hamilton),
       car2 = new F1Car("RB19", "Red Bull", Color.red, 2023, 355, 110, 29, redbull, verstappen),
       car3 = new F1Car("F1-75", "Ferrari", Color.red, 2023, 340, 110, 32, ferrari, leclerc),
@@ -55,10 +55,8 @@ const car1 = new F1Car("W13", "Mercedes", Color.silver, 2023, 350, 110, 30, merc
       car8 = new F1Car("VF23", "Haas", Color.white, 2023, 320, 110, 34, haas, magnussen);
 
 
-// Création du circuit pour le GP d’Italie (Monza)
 const monza = new Circuit("Grand Prix d’Italie", "Italie", 5.793, 11, 75.5, "dry");
 
-// Création de la course sur Monza, date 7 septembre 2025
 const raceItalianGP = new Race(
   "Italian GP 2025", 
   monza, 
@@ -66,7 +64,7 @@ const raceItalianGP = new Race(
   [car1, car2, car3, car4, car5, car6, car7, car8]  // Tous les participants
 );
 
-// Création de la saison 2025
+
 const season2025 = new Season(2025);
 season2025.addTeam(mercedes);
 season2025.addTeam(redbull);
@@ -82,7 +80,7 @@ raceItalianGP.startRace();
 
 raceItalianGP.setResults([car2, car1, car3, car4, car5, car6, car7, car8]);
 
-// Mise à jour des classements des pilotes selon résultats
+// Mise à jour du classement
 season2025.updateStandings(verstappen.name, 25);
 season2025.updateStandings(hamilton.name, 18);
 season2025.updateStandings(leclerc.name, 15);
@@ -93,7 +91,5 @@ season2025.updateStandings(bottas.name, 6);
 season2025.updateStandings(magnussen.name, 4);
 
 
-// Affichage de la saison
 season2025.displaySeasonSummary();
-
 season2025.displayGeneralStandings();
